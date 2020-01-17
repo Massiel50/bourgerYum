@@ -30,7 +30,7 @@ function objToSql (ob) {
 }
 
 
-var orm = function(tableInput, cb) {
+var orm = {all: function(tableInput, cb) {
     let queryString = "SELCT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result){
         if(err) {
@@ -74,3 +74,18 @@ update: function(table, objColVals, condition, cb) {
         cb(result);
     });
 },
+delete: function(table, condition, cb){
+    var queryString = "DELETE FROM " + table;
+    queryString += "WHERE ";
+    queryString += condition;
+
+    connection.query(queryString, function(err, result){
+        if(err){
+            throw err;
+        }
+        cb(result);
+    });
+}
+};
+
+module.exports = orm;
