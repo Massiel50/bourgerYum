@@ -7,8 +7,7 @@ $(function() {
       var newEatenState = {
         sleepy: newSleep
       };
-  
-      // Send the PUT request.
+      // Send the PUT request
       $.ajax("/api/burger/" + id, {
         type: "PUT",
         data: newEatenState
@@ -28,7 +27,6 @@ $(function() {
         sleepy: $("[name=burger]:checked").val().trim()
       };
   
-      // Send the POST request
       $.ajax("/api/burger", {
         type: "POST",
         data: newCat
@@ -42,8 +40,7 @@ $(function() {
   
     $(".delete-burger").on("click", function(event) {
       var id = $(this).data("id");
-  
-      // Send the DELETE request.
+
       $.ajax("/api/burger/" + id, {
         type: "DELETE"
       }).then(
