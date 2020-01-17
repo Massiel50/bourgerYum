@@ -21,7 +21,7 @@
 <ul>
   {{#each burger}}
     {{#unless eaten}}
-      {{> burgers/ eaten=true}}
+      {{> burgers/ eaten=false}}
     {{/unless}}
   {{/each}}
 </ul>
@@ -31,7 +31,7 @@
 <ul>
   {{#each burger}}
     {{#if eaten}}
-      {{> burgers/ eaten=false}}
+      {{> burgers/ eaten=true}}
     {{/if}}
   {{/each}}
 </ul>
