@@ -29,7 +29,8 @@ function objToSql (ob) {
     return arr.toString();
 }
 
-let orm = function(tableInput, cb) {
+
+var orm = function(tableInput, cb) {
     let queryString = "SELCT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result){
         if(err) {
@@ -38,12 +39,38 @@ let orm = function(tableInput, cb) {
         cb(result);
     });
 },
-create: function(table, cols, vals, cb){
+create: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
     queryString += "(";
     queryString += cols.toString();
     queryString += ") ";
     queryString += "VALUES (";
-    queryString += print
-}
+    queryString += printQuestionMarks(vals.length);
+    queryString += ") ";
+
+    console.log(queryString);
+
+    connection.query(queryString, vals, function(err, result) {
+        if(err){
+            throw err;
+        }
+        cb(result);
+    });
+},
+update: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
+
+    queryString += "SET ";
+    queryString += objToSql(objColVals);
+    queryString += "WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result){
+        if (err){
+            throw err;
+        }
+        cb(result);
+    });
+},
