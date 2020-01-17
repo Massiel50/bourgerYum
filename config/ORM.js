@@ -1,4 +1,4 @@
-var connection = require("../config/connection");
+var connection = require("./connection");
 
 // kinda stringifying question marks in an array
 
